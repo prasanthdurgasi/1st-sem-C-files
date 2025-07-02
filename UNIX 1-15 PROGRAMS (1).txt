@@ -1,0 +1,290 @@
+1. Write a shell script to accept two numbers and perform all arithmetic operations on it.
+
+#!/bin/bash
+
+echo "Enter the first number:"
+read a
+
+echo "Enter the second number:"
+read b
+
+sum=$((a + b))
+diff=$((a - b))
+prod=$((a * b))
+
+if [ $b -ne 0 ]; then
+  div=$((a / b))
+  mod=$((a % b))
+else
+  div="undefined (division by zero)"
+  mod="undefined (modulus by zero)"
+fi
+
+echo "Addition: $a + $b = $sum"
+echo "Subtraction: $a - $b = $diff"
+echo "Multiplication: $a * $b = $prod"
+echo "Division: $a / $b = $div"
+echo "Modulus: $a % $b = $mod"
+
+
+2. Write a shell script to find largest of three numbers using conditional execution operators
+
+#!/bin/bash
+
+echo "Enter first number:"
+read a
+echo "Enter second number:"
+read b
+echo "Enter third number:"
+read c
+
+[ $a -ge $b ] && [ $a -ge $c ] && echo "$a is the largest" || \
+([ $b -ge $a ] && [ $b -ge $c ] && echo "$b is the largest") || \
+echo "$c is the largest"
+
+3. Write a shell script to accept the name of the file from standard input and perform the following
+tests on it
+a) File executable
+b) File readable
+c) File writable
+d) Both readable & writable
+
+echo "Enter the file name:"
+read filename
+
+if [ ! -e "$filename" ]; then
+    echo "File does not exist."
+    exit 1
+fi
+
+if [ -x "$filename" ]; then
+    echo "File is executable"
+else
+    echo "File is not executable"
+fi
+
+if [ -r "$filename" ]; then
+    echo "File is readable"
+else
+    echo "File is not readable"
+fi
+
+if [ -w "$filename" ]; then
+    echo "File is writable"
+else
+    echo "File is not writable"
+fi
+
+if [ -r "$filename" ] && [ -w "$filename" ]; then
+    echo "File is both readable and writable"
+else
+    echo "File is not both readable and writable"
+fi
+
+4.Write a shell script which will display the username and terminal name who is login recently in to
+the Unix system.
+
+u="santhu"
+echo "user name $u"
+read -p"hello"
+
+5.Write a shell script to find number of files in a directory
+
+dir="${1:-.}"
+if [ -d "$dir" ]; then
+    file_count=$(find "$dir" -maxdepth 1 -type f | wc -l)
+    echo "Number of files in directory '$dir': $file_count"
+else
+    echo "Directory '$dir' does not exist."
+fi
+read -p "done"
+
+6.Write a shell script to print the following format
+1
+12
+123
+1234
+……….
+
+#!/bin/bash
+
+rows=5
+for ((i=0; i<=rows; i++))
+do
+        for((j=1;j<=i;j++))
+        do
+    echo -n "$j "
+done
+echo"  "
+done
+
+7. Write a shell script which will display the number of days in the given month and year
+
+echo "Enter the year:"
+read year
+echo "Enter the month:"
+read month
+if [["$month" -lt 1 || "$month" -gt 12]]
+then
+    echo "Invalid month"
+    exit 1
+fi
+days=$(date -d "$year-$month-01 +1 month -1 day" +%d)
+echo "Number of days in month $month of year $year is: $days"
+read -p"done"
+
+8. Write a shell script to check whether a given number is perfect number or not
+
+echo "enter number"
+read n
+sum=0
+{
+for((i=1;i<n;i++))
+do
+if((n%i==0));then
+sum=$((sum+i))
+fi
+done
+if((sum==n));then
+echo" $n is a perfect number"
+else
+echo" $n is not a perfect number"
+fi
+}
+
+9. Write a shell script for concatenation of two strings using arguments
+
+str1="Hello"
+str2="World"
+str3="$str1 $str2"
+echo "this is full string: $str3"
+
+read -p"hello:"user_input
+echo "$user_input"
+~
+
+10. Write a shell script to demonstrate break and continue statements
+
+echo "Enter a number greater than 6"
+read b
+
+for ((i = 0; i < b; i++))
+do
+    if (( i == 6 )); then
+        break
+    fi
+    echo "$i"
+done
+
+read -p "Hello: " user_input
+
+echo "Enter a number greater than 6"
+read n
+
+for ((i = 0; i < n; i++))
+do
+    if (( i == 6 )); then
+        continue
+    fi
+    echo "$i"
+done
+
+read -p "Hello: " user_input
+
+11. Write a shell script to satisfy the following menu options
+a. Display current directory path
+b. Display today’s
+c. Display users who are connected to the Unix system
+d. Quit
+
+display_menu() {
+  echo -e "\nMenu:"
+  echo -e "a. Display current directory path"
+  echo -e "b. Display today's date"
+  echo -e "c. Display users who are connected"
+  echo -e "d. Quit"
+}
+while true
+do
+  display_menu
+  read -p "Enter your choice: " choice
+  case "$choice" in
+    a)
+      echo "Current directory path: $(pwd)"
+      ;;
+    b)
+      echo "Today's date: $(date)"
+      ;;
+    c)
+      echo "Connected users:"
+      who
+      ;;
+    d)
+      echo "Exiting..."
+      exit 0
+      ;;
+    *)
+      echo "Invalid choice. Please try again."
+      ;;
+  esac
+done
+
+12. Write a shell script to delete all files whose size is zero bytes from current directory
+
+
+echo -n "Enter name of the directory : "
+read directory_name
+if [ -d "$directory_name" ];
+then
+    echo "Directory exist"
+        for i in `find $directory_name -size 0`
+        do
+            rm $i
+            echo "Zero-sized files are Successfully deleted"
+        done
+else
+    echo "Directory does not exist"
+
+fi
+read -p "done"
+
+13. Write a shell script to display reverse numbers from given argument list
+
+for ((i=$#; i>0; i--))
+do
+    echo "${!i}"
+done
+read -p"hello"
+
+14. Write a shell script to display factorial value from given argument list
+
+factorial() {
+    num=$1
+    fact=1
+    for ((i=1; i<=num; i++)); do
+        fact=$((fact * i))
+    done
+    echo "Factorial of $num is: $fact"
+}
+
+for arg in "$@"; do
+    factorial "$arg"
+done
+
+15. Write a shell script which will greet you “Good Morning”, “Good Afternoon”, “Good Evening”
+and “Good Night” according to current time
+
+hour=`date +%H`
+if [ $hour -le 12]
+then
+echo "GOOD MORNING WORLD"
+elif [ $hour -le 16 ]
+then
+echo "GOOD AFTERNOON WORLD"
+elif [ $hour -le 20 ]
+then
+echo "GOOD EVENING WORLD"
+else
+echo "GOOD NIGHT WORLD"
+fi
+read -p "hello"
