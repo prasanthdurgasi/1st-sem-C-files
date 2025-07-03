@@ -1,0 +1,345 @@
+3.a))
+
+import numpy as np
+list=[12.3,34.5,67.8]
+tuple=23.5,67.9,25.7
+a1=np.array(list)
+a2=np.array(tuple)
+print(type(a1))
+print(a1)
+print(a2)
+
+o/p=>
+
+D:\python problems>py test.py
+<class 'numpy.ndarray'>
+[12.3 34.5 67.8]
+[23.5 67.9 25.7]
+
+
+
+3.b))
+
+
+import numpy as np
+a=np.array([[10,20,30],[40,50,60],[70,80,90]])
+print('slicing:')
+print(a[:2,1:])
+print('indexing:',a[1,2])
+bool_array=[True,False,True,True]
+print('boolean indexing :',bool_array[2])
+
+o/p=>
+
+D:\python problems>py test.py
+slicing:
+[[20 30]
+ [50 60]]
+indexing: 60
+boolean indexing : True
+
+3.c))
+
+import numpy as np
+a=np.array([10,20,30,40,50,60])
+print('minimum:',np.min(a))
+print('maximun:',np.max(a))
+print('sum:',np.sum(a))
+print('cumsum:',np.cumsum(a))
+
+
+o/p=>
+
+D:\python problems>py test.py
+minimum: 10
+maximun: 60
+sum: 210
+cumsum: [ 10  30  60 100 150 210]
+
+
+
+4.a))
+
+import numpy as np
+a=np.array([[10,20,30],[40,50,60],[70,80,90]])
+print('rank:',np.linalg.matrix_rank(a))
+print('determinant:',int(np.linalg.det(a)))
+print('trace:',np.trace(a))
+
+o/p==>
+
+D:\python problems>py test.py
+rank: 2
+determinant: 0
+trace: 150
+
+
+
+
+4.b))
+
+import numpy as np
+a=np.array([[4,-2],[1,1]])
+eval,evec=np.linalg.eig(a)
+print(eval)
+
+o/p=>
+
+
+D:\python problems>py test.py
+[3. 2.]
+
+
+
+
+4.c))
+
+import numpy as np
+m=np.array([[10,20],[30,40]])
+a=np.array([10,20])
+b=np.array([3,4])
+print(np.dot(a,b))
+print(np.inner(a,b))
+print(np.outer(a,b))
+n=3
+print(np.linalg.matrix_power(m,n))
+
+o/p=>
+
+D:\python problems>py test.py
+110
+110
+[[30 40]
+ [60 80]]
+[[ 37000  54000]
+ [ 81000 118000]]
+
+
+
+
+ 5.a))
+
+ import numpy as np
+from PIL import Image
+
+array=np.ones((500,500,3),dtype=np.uint8)*255;
+image=Image.fromarray(array)
+image.show()
+
+image.save('pavan.png')
+
+o/p=>
+
+white screen
+
+
+
+5.b))
+
+import numpy as np
+from PIL import Image
+
+array=np.ones((500,500,3),dtype=np.uint8)*255;
+image=Image.fromarray(array)
+image.show()
+
+image.save('pavan.png')
+
+image1=Image.open('pavan.png')
+array1=np.array(image1)
+print(array1.shape)
+
+o/p:
+
+
+D:\python problems>py test.py
+(500, 500, 3)
+
+
+
+
+
+5.c))
+
+import numpy as np
+a=np.array([10,20,60,30,40,18,69,30,30])
+print(np.sort(a))
+print(np.where(a==30))
+print(np.count_nonzero(a==30))
+
+o/p=>
+
+D:\python problems>py test.py
+[10 18 20 30 30 30 40 60 69]
+(array([3, 7, 8]),)
+3
+
+
+
+
+
+6 a))
+
+import pandas as pd
+labels=['names','mohan','ajay','pavan','vivek']
+series=pd.Series(['marks',90,90,87,85],index=labels)
+print(series)
+
+
+o/p=>
+
+D:\python problems>py test.py
+names    marks
+mohan       90
+ajay        90
+pavan       87
+vivek       85
+dtype: object
+
+
+
+
+
+6 b))
+
+import pandas as pd
+dict={'name':'marks','ajay':90,'chirutha':99}
+series=pd.Series(dict)
+print(series)
+
+
+o/p=>
+
+
+D:\python problems>py test.py
+name        marks
+ajay           90
+chirutha       99
+dtype: object
+
+
+
+
+
+
+
+6 c))
+
+
+import pandas as pd
+data={
+	'name':['ajay','pavan','nithin','sanjay'],
+	'marks'	:[40,50,60,70]
+}
+df=pd.DataFrame(data)
+print(df.describe())
+print(df.head(2))
+print(df.tail(2))
+
+
+o/p=>
+
+
+D:\python problems>py test.py
+           marks
+count   4.000000
+mean   55.000000
+std    12.909944
+min    40.000000
+25%    47.500000
+50%    55.000000
+75%    62.500000
+max    70.000000
+    name  marks
+0   ajay     40
+1  pavan     50
+     name  marks
+2  nithin     60
+3  sanjay     70
+
+
+
+
+
+7 a))
+
+import numpy as np
+import pandas as pd
+data={
+	'name':['ajay','pavan','nithin','sanjay'],
+	'marks'	:[40,50,60,70]
+}
+df=pd.DataFrame(data)
+series=pd.Series([10,20,30,40,50])
+a=np.array(df)
+b=np.array(series)
+print(a)
+print(b)
+
+o/p=>
+
+D:\python problems>py test.py
+[['ajay' 40]
+ ['pavan' 50]
+ ['nithin' 60]
+ ['sanjay' 70]]
+[10 20 30 40 50]
+
+
+
+
+
+
+7 b))
+
+import pandas as pd
+data ={ 'name':['vivek','pavan','chirutha'],
+		'age':[10,20,30],
+		'marks':[80,90,100]
+}
+df=pd.DataFrame(data)
+df.to_csv('people.csv',index=False)
+print('csv file created...')
+df_csv=pd.read_csv('people.csv')
+print(df_csv.head(2))
+
+
+o/p=>
+
+
+D:\python problems>py 7b.py
+csv file created...
+    name  age  marks
+0  vivek   10     80
+1  pavan   20     90
+
+
+7 c))
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Sample data
+df = pd.DataFrame({
+    'Name': ['A', 'B', 'C', 'D'],
+    'Math': [70, 85, 90, 60],
+    'English': [75, 80, 85, 70]
+})
+
+# i. Bar plot
+df.plot(kind='bar', x='Name', y='Math')
+plt.show()
+
+# ii. Histogram
+df['Math'].plot(kind='hist')
+plt.show()
+
+# iii. Line plot
+df.plot(kind='line', x='Name', y=['Math', 'English'])
+plt.show()
+
+# iv. Scatter plot
+df.plot(kind='scatter', x='Math', y='English')
+plt.show()
+
+
